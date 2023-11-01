@@ -1,0 +1,58 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateIndicatorInput {
+  """Indicator associated to the turbine."""
+  indicator: Float!
+  timestamp: DateTime!
+
+  """Turbine id associated to the indicator."""
+  turbineId: Int!
+
+  """Variable associated to the entry of every indicator."""
+  variable: Int!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Indicator {
+  """Indicator associated to the turbine"""
+  indicator: Float!
+  timestamp: DateTime!
+
+  """Turbine id associated to the indicator"""
+  turbineId: Int!
+
+  """Variable associated to the entry of every indicator"""
+  variable: Int!
+}
+
+type Mutation {
+  createIndicator(createIndicatorInput: CreateIndicatorInput!): Indicator!
+  removeIndicator(id: Int!): Indicator!
+  updateIndicator(updateIndicatorInput: UpdateIndicatorInput!): Indicator!
+}
+
+type Query {
+  indicator(turbineId: Int!): [Indicator!]!
+  indicators: [Indicator!]!
+  indicatorsByTurbineId(turbineId: Int!): [Indicator!]!
+}
+
+input UpdateIndicatorInput {
+  id: Int!
+
+  """Indicator associated to the turbine."""
+  indicator: Float
+  timestamp: DateTime
+
+  """Turbine id associated to the indicator."""
+  turbineId: Int
+
+  """Variable associated to the entry of every indicator."""
+  variable: Int
+}
