@@ -4,14 +4,14 @@ import { DeleteResult } from 'typeorm';
 import { CreateIndicatorInput } from './dto/create-indicator.input';
 import { UpdateIndicatorInput } from './dto/update-indicator.input';
 import { Indicator } from './entities/indicator.entity';
-import { IndicatorRepository } from './indicator.repository';
+import { IndicatorsRepository } from './indicators.repository';
 
 @Injectable()
 export class IndicatorsService {
   // Logger used for debug and error reporting
   private readonly logger = new Logger(IndicatorsService.name);
 
-  constructor(private readonly indicatorRepository: IndicatorRepository) {}
+  constructor(private readonly indicatorRepository: IndicatorsRepository) {}
 
   async createNewIndicator(
     createIndicatorInput: CreateIndicatorInput,
