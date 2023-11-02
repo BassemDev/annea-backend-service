@@ -20,6 +20,7 @@ import { DBType } from '../config/types';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
+      playground: true,
     }),
     // Configuration environment variable for DB and third parties or API keys
     ConfigModule.forRoot({
