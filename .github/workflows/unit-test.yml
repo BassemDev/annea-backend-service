@@ -1,0 +1,23 @@
+name: Annea Backend service Unit Test
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+  push:
+
+# Job Definition
+jobs:
+    Pre-build:
+     runs-on: ubuntu-latest
+     
+     strategy:
+       matrix:
+         node-version: [16.x, 18.x, 20.x]
+         
+     steps:
+     - uses: actions/checkout@v4
+     - name: Use node ${{matrix.node-version}}
+       uses: actions/setup-node@v3
+     - name: Install project dependencies
+       run: npm ci
+     - name: Run unit tests
+       run: npm run test
