@@ -45,7 +45,9 @@ export class IndicatorsResolver {
   updateIndicator(
     @Args('updateIndicatorInput') updateIndicatorInput: UpdateIndicatorInput,
   ) {
-    this.logger.log(`Mutation - update indicator with id: ${updateIndicatorInput.id} called.`);
+    this.logger.log(
+      `Mutation - update indicator with id: ${updateIndicatorInput.id} called.`,
+    );
     return this.indicatorsService.modifyIndicator(updateIndicatorInput);
   }
 
@@ -59,7 +61,9 @@ export class IndicatorsResolver {
   getIndicatorsByTurbineId(
     @Args('turbineId', { type: () => Int }) turbineId: number,
   ) {
-    this.logger.log(`Query - fetch all indicator by turbine id: ${turbineId} called.`);
+    this.logger.log(
+      `Query - fetch all indicator by turbine id: ${turbineId} called.`,
+    );
     return this.indicatorsService.findAllIndicatorByTurbineId(turbineId);
   }
 }
