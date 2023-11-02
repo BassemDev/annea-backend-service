@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { IndicatorsService } from './indicators.service';
 import { IndicatorsResolver } from './indicators.resolver';
 import { Indicator } from './entities/indicator.entity';
-import { IndicatorsRepository } from './indicatorsRepository';
+import { IndicatorsRepository } from './indicators.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Indicator])],
