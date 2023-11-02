@@ -2,7 +2,11 @@
   "name": "annea-indicator-service",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": {
+    "name": "Bassem Ghazouani",
+    "email": "bassem.ghazouani@hotmail.com",
+    "url": "bassemghazouani.com"
+  },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -17,7 +21,8 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/server": "^4.9.5",
@@ -40,6 +45,8 @@
     "typeorm": "^0.3.17"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.2.0",
+    "@commitlint/config-conventional": "^18.1.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",
     "@types/cookie-parser": "^1.4.5",
@@ -53,6 +60,8 @@
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-unicorn": "^49.0.0",
+    "husky": "^8.0.0",
     "jest": "^29.5.0",
     "prettier": "^3.0.0",
     "source-map-support": "^0.5.21",
