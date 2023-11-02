@@ -11,7 +11,7 @@ import { IndicatorsModule } from './indicators/indicators.module';
 import { appConfigFactory } from '../config/app.config';
 import { datbaseConfigFactory } from '../config/databse.config';
 import { validateConfig } from '../config/validation';
-import { DBType, Environment } from '../config/types';
+import { DBType } from '../config/types';
 
 @Module({
   imports: [
@@ -26,7 +26,6 @@ import { DBType, Environment } from '../config/types';
       load: [appConfigFactory, datbaseConfigFactory],
       validate: validateConfig,
       envFilePath: '.development.env',
-      ignoreEnvFile: process.env.NODE_ENV === Environment.Production,
     }),
     // Configuration of DB and connection to instance
     TypeOrmModule.forRootAsync({
