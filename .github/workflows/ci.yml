@@ -1,4 +1,4 @@
-name: Annea Backend service Unit Test
+name: Annea Backend service Unit Test / Build
 on:
   pull_request:
     types: [opened, edited, reopened]
