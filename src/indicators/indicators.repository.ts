@@ -6,9 +6,9 @@ import { CreateIndicatorInput } from './dto/create-indicator.input';
 import { UpdateIndicatorInput } from './dto/update-indicator.input';
 
 @Injectable()
-export class IndicatorRepository extends Repository<Indicator> {
+export class IndicatorsRepository extends Repository<Indicator> {
   // Logger used for debug and error reporting
-  private readonly logger = new Logger(IndicatorRepository.name);
+  private readonly logger = new Logger(IndicatorsRepository.name);
 
   constructor(private dataSource: DataSource) {
     super(Indicator, dataSource.createEntityManager());

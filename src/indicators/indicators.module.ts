@@ -4,10 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { IndicatorsService } from './indicators.service';
 import { IndicatorsResolver } from './indicators.resolver';
 import { Indicator } from './entities/indicator.entity';
-import { IndicatorRepository } from './indicator.repository';
+import { IndicatorsRepository } from './indicatorsRepository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Indicator])],
-  providers: [IndicatorsResolver, IndicatorsService, IndicatorRepository],
+  providers: [IndicatorsResolver, IndicatorsService, IndicatorsRepository],
 })
 export class IndicatorsModule {}
