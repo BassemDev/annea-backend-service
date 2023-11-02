@@ -9,6 +9,7 @@ async function bootstrap() {
   // Pipe activation for DTO validation
   app.useGlobalPipes(new ValidationPipe());
 
-  await app.listen(3000);
+  // Host is neede in case of cloud server deployment
+  await app.listen(3000, '0.0.0.0');
 }
 bootstrap();
