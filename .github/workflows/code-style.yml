@@ -1,4 +1,4 @@
-name: Annea Backend service Unit Test
+name: Annea Backend service code style
 on:
     push:
 # Job Definition
