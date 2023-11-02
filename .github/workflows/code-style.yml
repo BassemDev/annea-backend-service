@@ -1,0 +1,24 @@
+name: Annea Backend service Unit Test
+on:
+    push:
+# Job Definition
+jobs:
+    Code-style:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            node-version: [20.x]
+
+        steps:
+        - name: Checkout step
+          uses: actions/checkout@v4
+          
+        - uses: nelonoel/branch-name@v1.0.1
+        
+        - name: Use node ${{matrix.node-version}}
+          uses: actions/setup-node@v3
+        - name: Install project dependencies
+          run: npm ci
+        # Run linter in project
+        - name: Lint Action
+          uses: wearerequired/lint-action@v2.3.0
