@@ -1,10 +1,11 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { Logger } from '@nestjs/common';
+import { Logger, NotFoundException } from '@nestjs/common';
 
 import { IndicatorsService } from './indicators.service';
 import { CreateIndicatorInput } from './dto/create-indicator.input';
 import { UpdateIndicatorInput } from './dto/update-indicator.input';
 import { Indicator } from './responses/indicator.response';
+import { IsPositive } from "class-validator";
 
 @Resolver(() => Indicator)
 export class IndicatorsResolver {
@@ -14,56 +15,55 @@ export class IndicatorsResolver {
   constructor(private readonly indicatorsService: IndicatorsService) {}
 
   @Mutation(() => Indicator)
-  createIndicator(
+  async createIndicator(
     @Args('createIndicatorInput') createIndicatorInput: CreateIndicatorInput,
   ) {
     this.logger.log(`Query - create indicator called.`);
-    return this.indicatorsService.createNewIndicator(createIndicatorInput);
+    return await this.indicatorsService.createNewIndicator(
+      createIndicatorInput,
+    );
   }
 
   @Query(() => [Indicator], { name: 'indicators' })
-  findAll() {
+  async findAll() {
     this.logger.log(`Query - fetch all indicator called.`);
-    return this.indicatorsService.retrieveAllIndicator();
+    return await this.indicatorsService.retrieveAllIndicator();
   }
 
   @Query(() => [Indicator], { name: 'indicatorsByTurbineId' })
-  findAllindicatorByTurbineId(
+  async findAllindicatorByTurbineId(
     @Args('turbineId', { type: () => Int }) turbineId: number,
   ) {
     this.logger.log(`Query - find all indicator by id called.`);
-    return this.indicatorsService.retrieveIndicatorById(turbineId);
+    return await this.indicatorsService.retrieveIndicatorById(turbineId);
   }
 
   @Query(() => Indicator, { name: 'indicator' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  async findIndicatorById(@Args('id', { type: () => Int }) id: number) {
     this.logger.log(`Query - find indicator with id: ${id} called.`);
-    return this.indicatorsService.retrieveIndicatorById(id);
+    const result = await this.indicatorsService.retrieveIndicatorById(id);
+
+    if (result === null) {
+      this.logger.log(`There was no indicator with id: ${id} found.`);
+      throw new NotFoundException(`Indicator with id ${id} not found`);
+    }
+
+    return result;
   }
 
   @Mutation(() => Indicator)
-  updateIndicator(
+  async updateIndicator(
     @Args('updateIndicatorInput') updateIndicatorInput: UpdateIndicatorInput,
   ) {
     this.logger.log(
       `Mutation - update indicator with id: ${updateIndicatorInput.id} called.`,
     );
-    return this.indicatorsService.modifyIndicator(updateIndicatorInput);
+    return await this.indicatorsService.modifyIndicator(updateIndicatorInput);
   }
 
   @Mutation(() => Indicator)
-  removeIndicator(@Args('id', { type: () => Int }) id: number) {
+  async removeIndicator(@Args('id', { type: () => Int }) id: number) {
     this.logger.log(`Mutation - delete indicator with id: ${id} called.`);
-    return this.indicatorsService.deleteIndicator(id);
-  }
-
-  @Query(() => [Indicator], { name: 'indicator' })
-  getIndicatorsByTurbineId(
-    @Args('turbineId', { type: () => Int }) turbineId: number,
-  ) {
-    this.logger.log(
-      `Query - fetch all indicator by turbine id: ${turbineId} called.`,
-    );
-    return this.indicatorsService.findAllIndicatorByTurbineId(turbineId);
+    return await this.indicatorsService.deleteIndicator(id);
   }
 }

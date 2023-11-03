@@ -12,6 +12,7 @@ import { appConfigFactory } from '../config/app.config';
 import { datbaseConfigFactory } from '../config/databse.config';
 import { validateConfig } from '../config/validation';
 import { DBType } from '../config/types';
+import { GraphQLFormattedError } from 'graphql/error';
 
 @Module({
   imports: [
@@ -21,6 +22,13 @@ import { DBType } from '../config/types';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       playground: true,
+      formatError: (error: GraphQLFormattedError) => ({
+        message: error.message,
+        path: error.path,
+        extensions: {
+          status: error.extensions?.status,
+        },
+      }),
     }),
     // Configuration environment variable for DB and third parties or API keys
     ConfigModule.forRoot({
