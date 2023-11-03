@@ -10,6 +10,9 @@ import { GraphQLResolveInfo } from 'graphql';
 
 @Catch()
 export class GenericExceptionFilter implements GqlExceptionFilter {
+  // Logger used for debug and error reporting
+  private readonly logger = new Logger(GenericExceptionFilter.name);
+
   catch(exception: HttpException, host: ArgumentsHost) {
     const gqlHost = GqlArgumentsHost.create(host);
     const info = gqlHost.getInfo<GraphQLResolveInfo>();
@@ -20,7 +23,7 @@ export class GenericExceptionFilter implements GqlExceptionFilter {
 
     if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
       // tslint:disable-next-line: no-console
-      console.error(exception);
+      this.logger.error(exception);
     }
 
     const errorResponse = {
