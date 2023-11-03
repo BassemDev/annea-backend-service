@@ -15,9 +15,13 @@ jobs:
      steps:
      - name: Checkout step
        uses: actions/checkout@v4
+
      - uses: nelonoel/branch-name@v1.0.1
+     - run: echo Ruuning on ${BRANCH_NAME} branch
+
      - name: Use node ${{matrix.node-version}}
        uses: actions/setup-node@v3
+       
      - name: Install project dependencies
        run: npm ci
      - name: Run unit tests
