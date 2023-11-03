@@ -38,7 +38,7 @@ type Mutation {
 }
 
 type Query {
-  indicator(turbineId: Int!): [Indicator!]!
+  indicator(id: Int!): Indicator!
   indicators: [Indicator!]!
   indicatorsByTurbineId(turbineId: Int!): [Indicator!]!
 }
