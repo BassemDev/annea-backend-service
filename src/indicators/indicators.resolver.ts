@@ -1,11 +1,12 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
-import { Logger, NotFoundException } from '@nestjs/common';
+import { Logger, NotFoundException, UsePipes } from '@nestjs/common';
 
 import { IndicatorsService } from './indicators.service';
 import { CreateIndicatorInput } from './dto/create-indicator.input';
 import { UpdateIndicatorInput } from './dto/update-indicator.input';
 import { Indicator } from './responses/indicator.response';
-import { IsPositive } from "class-validator";
+import { ArgsValidationPipe } from '../pipes/argsValidationPipe';
+import { idSchema, turbineIdSchema } from '../pipes/schemavalidation';
 
 @Resolver(() => Indicator)
 export class IndicatorsResolver {
@@ -31,14 +32,17 @@ export class IndicatorsResolver {
   }
 
   @Query(() => [Indicator], { name: 'indicatorsByTurbineId' })
+  @UsePipes(new ArgsValidationPipe(turbineIdSchema))
   async findAllindicatorByTurbineId(
-    @Args('turbineId', { type: () => Int }) turbineId: number,
+    @Args('turbineId', { type: () => Int })
+    turbineId: number,
   ) {
     this.logger.log(`Query - find all indicator by id called.`);
     return await this.indicatorsService.retrieveIndicatorById(turbineId);
   }
 
   @Query(() => Indicator, { name: 'indicator' })
+  @UsePipes(new ArgsValidationPipe(idSchema))
   async findIndicatorById(@Args('id', { type: () => Int }) id: number) {
     this.logger.log(`Query - find indicator with id: ${id} called.`);
     const result = await this.indicatorsService.retrieveIndicatorById(id);
