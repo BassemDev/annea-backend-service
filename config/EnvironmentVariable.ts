@@ -48,4 +48,9 @@ export class EnvironmentVariables {
   @MinLength(2)
   @IsString({ message: 'Failed to verify the app name.' })
   APP_NAME: string;
+
+  @IsDefined({ message: 'API TOKEN is NOT defined.' })
+  @MinLength(8)
+  @IsString({ message: 'Failed to verify the API TOKEN.' })
+  API_TOKEN: string;
 }

@@ -6,6 +6,7 @@ export enum Environment {
 export enum ConfigRegistrationKey {
   APP = 'App',
   DB = 'DB',
+  TOKEN = 'TOKEN',
 }
 
 export enum DBType {
