@@ -1,5 +1,5 @@
 // NPM dependencies imports
-import { Logger, Module } from '@nestjs/common';
+import { Logger, MiddlewareConsumer, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -13,6 +13,9 @@ import { datbaseConfigFactory } from '../config/databse.config';
 import { validateConfig } from '../config/validation';
 import { DBType } from '../config/types';
 import { GraphQLFormattedError } from 'graphql/error';
+import { AuthModule } from './auth/auth.module';
+import { tokenConfigFactory } from '../config/token.config';
+import { AuthMiddleware } from './middleware/auth/auth.middleware';
 
 @Module({
   imports: [
@@ -32,7 +35,7 @@ import { GraphQLFormattedError } from 'graphql/error';
     }),
     // Configuration environment variable for DB and third parties or API keys
     ConfigModule.forRoot({
-      load: [appConfigFactory, datbaseConfigFactory],
+      load: [appConfigFactory, datbaseConfigFactory, tokenConfigFactory],
       validate: validateConfig,
       envFilePath: '.development.env',
     }),
@@ -57,8 +60,14 @@ import { GraphQLFormattedError } from 'graphql/error';
       inject: [ConfigService],
     }),
     IndicatorsModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [Logger],
 })
-export class AppModule {}
+export class AppModule {
+  // Enable api token authorizer for the fetch/mutation/subscription
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AuthMiddleware).forRoutes('');
+  }
+}
