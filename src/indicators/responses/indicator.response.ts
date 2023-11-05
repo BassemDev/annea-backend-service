@@ -2,6 +2,11 @@ import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 
 @ObjectType()
 export class Indicator {
+  @Field(() => Int, {
+    description: 'Indicator id  associated to the indicator',
+  })
+  readonly id: number;
+
   @Field(() => Float, { description: 'Indicator associated to the turbine' })
   readonly indicator: number;
 
