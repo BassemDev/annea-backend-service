@@ -32,7 +32,14 @@ async function bootstrap() {
     }),
   );
 
+  // Enable Cors for specifc domain access with specific headers
+  app.enableCors({
+    allowedHeaders: ['content-type', 'Authorization'],
+    origin: ['http://localhost:3000', 'https://annea-ui.onrender.com'],
+    credentials: true,
+  });
+
   // Host is neede in case of cloud server deployment
-  await app.listen(3000, '0.0.0.0');
+  await app.listen(3001, '0.0.0.0');
 }
 bootstrap();
