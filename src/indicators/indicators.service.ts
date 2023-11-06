@@ -4,6 +4,7 @@ import { CreateIndicatorInput } from './dto/create-indicator.input';
 import { UpdateIndicatorInput } from './dto/update-indicator.input';
 import { Indicator } from './entities/indicator.entity';
 import { IndicatorsRepository } from './indicators.repository';
+import { DeleteResult } from 'typeorm';
 
 @Injectable()
 export class IndicatorsService {
@@ -60,10 +61,9 @@ export class IndicatorsService {
     }
   }
 
-  async deleteIndicator(id: number): Promise<number | null | undefined> {
+  async deleteIndicator(id: number): Promise<DeleteResult> {
     try {
-      const deleteResult = await this.indicatorRepository.deleteIndicator(id);
-      return deleteResult.affected;
+      return await this.indicatorRepository.deleteIndicator(id);
     } catch (error) {
       this.logger.error(
         `An error happened when deleting a specific indicator with id: ${id}. Related error is: ${error}`,
