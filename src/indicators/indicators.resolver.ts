@@ -64,7 +64,9 @@ export class IndicatorsResolver {
     this.logger.log(
       `Mutation - update indicator with id: ${updateIndicatorInput.id} called.`,
     );
-    return await this.indicatorsService.modifyIndicator(updateIndicatorInput);
+    const result =
+      await this.indicatorsService.modifyIndicator(updateIndicatorInput);
+    return result;
   }
 
   @Mutation(() => DeletedIndicator)
