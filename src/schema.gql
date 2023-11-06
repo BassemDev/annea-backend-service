@@ -36,7 +36,7 @@ type Indicator {
 
 type Mutation {
   createIndicator(createIndicatorInput: CreateIndicatorInput!): Indicator!
-  removeIndicator(id: Int!): Indicator!
+  removeIndicator(id: Int!): Int!
   updateIndicator(updateIndicatorInput: UpdateIndicatorInput!): Indicator!
 }
 

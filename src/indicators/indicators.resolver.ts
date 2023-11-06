@@ -1,5 +1,6 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { Logger, NotFoundException, UsePipes } from '@nestjs/common';
+import { DeleteResult } from 'typeorm';
 
 import { IndicatorsService } from './indicators.service';
 import { CreateIndicatorInput } from './dto/create-indicator.input';
@@ -65,7 +66,7 @@ export class IndicatorsResolver {
     return await this.indicatorsService.modifyIndicator(updateIndicatorInput);
   }
 
-  @Mutation(() => Indicator)
+  @Mutation(() => Int)
   async removeIndicator(@Args('id', { type: () => Int }) id: number) {
     this.logger.log(`Mutation - delete indicator with id: ${id} called.`);
     return await this.indicatorsService.deleteIndicator(id);

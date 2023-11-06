@@ -1,5 +1,4 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { DeleteResult } from 'typeorm';
 
 import { CreateIndicatorInput } from './dto/create-indicator.input';
 import { UpdateIndicatorInput } from './dto/update-indicator.input';
@@ -61,14 +60,17 @@ export class IndicatorsService {
     }
   }
 
-  async deleteIndicator(id: number): Promise<DeleteResult> {
+  async deleteIndicator(id: number): Promise<number | null | undefined> {
     try {
-      return this.indicatorRepository.deleteIndicator(id);
+      const deleteResult = await this.indicatorRepository.deleteIndicator(id);
+      return deleteResult.affected;
     } catch (error) {
       this.logger.error(
         `An error happened when deleting a specific indicator with id: ${id}. Related error is: ${error}`,
       );
-      throw error;
+      throw new Error(
+        `Deleting indicator with id: ${id} failed with error: ${error}`,
+      );
     }
   }
 
