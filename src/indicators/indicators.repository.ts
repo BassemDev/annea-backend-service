@@ -14,6 +14,11 @@ export class IndicatorsRepository extends Repository<Indicator> {
     super(Indicator, dataSource.createEntityManager());
   }
 
+  /**
+   * this is function is used to create a new indicator in indicator's table.
+   * @param createIndicatorInput this will type of CreateIndicatorInput in which
+   * @returns promise of indicator
+   */
   async createIndicator(
     createIndicatorInput: CreateIndicatorInput,
   ): Promise<Indicator> {
@@ -21,11 +26,20 @@ export class IndicatorsRepository extends Repository<Indicator> {
     return await this.save(createIndicatorInput);
   }
 
+  /**
+   * this function used to get data of an all indicators which exist in DB
+   * @returns promise of table indicator or empty table in case of empty table
+   */
   async getAllIndicator(): Promise<Indicator[]> {
     this.logger.log(`Start fetching all indactors.`);
     return this.find();
   }
 
+  /**
+   * this function used to get data of an indicator whom id is passed as parameter
+   * @param id is of type of number, which represent the id of the indicator.
+   * @returns promise of indicator or null in case of NOT found
+   */
   async getIndicatorById(id: number): Promise<Indicator | null> {
     this.logger.log(`Start fetching the indicator with id: ${id}.`);
     return this.findOneBy({ id });
@@ -40,6 +54,11 @@ export class IndicatorsRepository extends Repository<Indicator> {
     return this.save({ ...updateIndicatorInput });
   }
 
+  /**
+   * this function is used to remove or delete indicator from database.
+   * @param id is the type of number, which represent id of an indicator
+   * @returns delete result which contain for exp. the affected rows
+   */
   async deleteIndicator(id: number): Promise<DeleteResult> {
     this.logger.log(`Start deleting the indicator with id: ${id}.`);
     return this.delete({ id });

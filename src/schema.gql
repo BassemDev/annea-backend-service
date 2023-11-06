@@ -19,6 +19,11 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type DeletedIndicator {
+  """Affected id after delete operation"""
+  affected: Int!
+}
+
 type Indicator {
   """Indicator id  associated to the indicator"""
   id: Int!
@@ -36,7 +41,7 @@ type Indicator {
 
 type Mutation {
   createIndicator(createIndicatorInput: CreateIndicatorInput!): Indicator!
-  removeIndicator(id: Int!): Indicator!
+  removeIndicator(id: Int!): DeletedIndicator!
   updateIndicator(updateIndicatorInput: UpdateIndicatorInput!): Indicator!
 }
 
