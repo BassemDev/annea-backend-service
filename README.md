@@ -41,7 +41,8 @@ Ran all test suites.
 
 ## Developer important notes 🎯
 - Please keep in your mind that this project uses huskies which is a pre-check before you commit and push.\
-- This is a safety to keep always the project build successful and the code style unique cross all the developers. So always keep in your mind to run the formatter before pushing.
+  - This is a safety to keep always the project build successful and the code style unique cross all the developers. So always keep in your mind to run the formatter before pushing.
+- The project use postgresql as DB so you might need DBeaver to check the Table or do DB operations. -> [LINK](https://dbeaver.io/)
 
 ## Building and Deployment
 The CI/CD of this project is handled by the github actions workflow:
