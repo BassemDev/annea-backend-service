@@ -7,7 +7,20 @@ describe('AuthService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [AuthService, ConfigService],
+      providers: [
+        AuthService,
+        {
+          provide: ConfigService,
+          useValue: {
+            get: jest.fn((key: string) => {
+              if (key === 'TOKEN.apiToken') {
+                return 'validAPiKey';
+              }
+              return '';
+            }),
+          },
+        },
+      ],
     }).compile();
 
     service = module.get<AuthService>(AuthService);
@@ -15,5 +28,27 @@ describe('AuthService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
+  });
+
+  it('should return FALSE for wrong api token', () => {
+    // Arrange
+    const falseApiKey = 'wrongAPiKey';
+
+    // Act
+    const result = service.validateApiKey(falseApiKey);
+
+    // Assert
+    expect(result).toBeFalsy();
+  });
+
+  it('should return TRUE for valid api token', () => {
+    // Arrange
+    const validApiKey = 'validAPiKey';
+
+    // Act
+    const result = service.validateApiKey(validApiKey);
+
+    // Assert
+    expect(result).toBeTruthy();
   });
 });
