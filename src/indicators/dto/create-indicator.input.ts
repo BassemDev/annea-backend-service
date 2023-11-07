@@ -3,13 +3,11 @@ import {
   IsDate,
   IsDefined,
   IsNumber,
-  IsPositive,
-  IsDecimal,
+  IsPositive
 } from 'class-validator';
 
 @InputType()
 export class CreateIndicatorInput {
-  @IsDecimal()
   @IsDefined({
     message: 'The indicator MUST be defined when creating new indicator.',
   })
