@@ -35,12 +35,12 @@ export class IndicatorsResolver {
 
   @Query(() => [Indicator], { name: 'indicatorsByTurbineId' })
   @UsePipes(new ArgsValidationPipe(turbineIdSchema))
-  async findAllindicatorByTurbineId(
+  async findAllIndicatorByTurbineId(
     @Args('turbineId', { type: () => Int })
     turbineId: number,
   ) {
     this.logger.log(`Query - find all indicator by id called.`);
-    return await this.indicatorsService.retrieveIndicatorById(turbineId);
+    return await this.indicatorsService.findAllIndicatorByTurbineId(turbineId);
   }
 
   @Query(() => Indicator, { name: 'indicator' })
