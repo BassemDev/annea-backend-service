@@ -1,10 +1,5 @@
 import { InputType, Int, Field, Float } from '@nestjs/graphql';
-import {
-  IsDate,
-  IsDefined,
-  IsNumber,
-  IsPositive
-} from 'class-validator';
+import { IsDate, IsDefined, IsNumber, IsPositive } from 'class-validator';
 
 @InputType()
 export class CreateIndicatorInput {
