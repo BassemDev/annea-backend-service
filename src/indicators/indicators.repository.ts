@@ -51,7 +51,11 @@ export class IndicatorsRepository extends Repository<Indicator> {
     this.logger.log(
       `Start updating the indicator with id: ${updateIndicatorInput.id}.`,
     );
-    return this.save({ ...updateIndicatorInput });
+
+    const indicator = await this.getIndicatorById(updateIndicatorInput.id);
+    const entityToSave = { ...indicator, ...updateIndicatorInput };
+
+    return this.save(entityToSave);
   }
 
   /**

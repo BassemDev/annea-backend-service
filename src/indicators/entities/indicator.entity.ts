@@ -5,7 +5,7 @@ export class Indicator {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
+  @Column('decimal', { precision: 10, scale: 2 })
   indicator: number;
 
   @Column()

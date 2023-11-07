@@ -52,7 +52,9 @@ export class IndicatorsService {
     updateIndicatorInput: UpdateIndicatorInput,
   ): Promise<Indicator> {
     try {
-      return this.indicatorRepository.updateIndicator(updateIndicatorInput);
+      return await this.indicatorRepository.updateIndicator(
+        updateIndicatorInput,
+      );
     } catch (error) {
       this.logger.error(
         `An error happened when updating a specific indicator with id: ${updateIndicatorInput.id}. Related error is: ${error}`,
