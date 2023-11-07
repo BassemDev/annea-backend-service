@@ -1,73 +1,52 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="https://annea.ai/" target="blank"><img src="https://annea.ai/wp-content/uploads/2020/10/ANNEA-Logo-long-tagline-green-bg.jpg" width="200" alt="Annea Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# ANNEA UI 📃
+The following project is the backend serivce that manage CRUD operations or indicator and provice API that could be consumed from any FE client **(using Graphql client)**.
+This backend service is built with the framework NestJS, please take a look at the section stack below 👇 to know how to run it.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Project stack information
+The project is built with Nestjs which is just an framework dedicated to create standalone backend service.
+The porject main language is Typescript (Javascript + Types) for all the business logic, different library to manage http calls and typeORM to manage entities.
+To feel more familiar with these technologies and stacks, please find below all relevant documentations:
+- NestJs (Backend/Server side framework) -> [NESTJS DOCS](https://docs.nestjs.com/) 👩‍💻🧑‍💻
+- Express JS (Routing) -> [Express DOCS](https://expressjs.com/) 💫
+- GraphQL (Javascript with types) -> [GraphQL DOCS](https://graphql.org/) 🧠
 
-## Description
+## Setup ⏳
+Please make sure you have the minimum requirements to be able to run the project. This means you already installed Node latest stable version.
+Optional: You could also install Docker in case you would like to create portable image and test it in different machine.
+- You can install node from here: [Download Node](https://nodejs.org/en) 🏗️
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## How to run the project ⏲
+This a simple NPM project, this mean you just need to install the package used first, then project will be able to be started:
+1. Open a new terminal.
+2. Cd (ie: locate) to the path of the project root.
+3. Run the following command ``npm i``. The previous command will take a bit of time to install all the packages.
+4. After that , run the command ``npm start``.
+If everything is fine, then a server will be starting and listening in the following address `http://localhost:3001`.
 
-## Installation
-
-```bash
-$ npm install
+## Test the project 🧨
+The project conatain different test case of functionality and components:\
+1. run the command ``npm test``
+This is the output after finishing the test execution:
+```
+Test Suites: 5 passed, 5 total
+Tests:       6 passed, 6 total
+Snapshots:   0 total
+Time:        3.678 s, estimated 4 s
+Ran all test suites.
 ```
 
-## Running the app
+## Developer important notes 🎯
+- Please keep in your mind that this project uses huskies which is a pre-check before you commit and push.\
+  - This is a safety to keep always the project build successful and the code style unique cross all the developers. So always keep in your mind to run the formatter before pushing.
+- The project use postgresql as DB so you might need DBeaver to check the Table or do DB operations. -> [LINK](https://dbeaver.io/)
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## Building and Deployment
+The CI/CD of this project is handled by the github actions workflow:
+- You can visit the actions tab to find out all the previous build of this project.
+For the project deployment:
+- This is handled directly via an intergration with a service cloud provider
+- With simple manual click (or merge pull request) in the cloud service, we will have the project live under the following link: [Annea UI](https://annea-backend-service.onrender.com/)
